@@ -1,21 +1,19 @@
 // These are our required libraries to make the server work.
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import path from "path";
-import express from "express";
-import dotenv from "dotenv";
-import fetch from "node-fetch";
-import reload from "livereload";
-import connectReload from "connect-livereload";
+import path from 'path';
+import express from 'express';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';
+import reload from 'livereload';
+import connectReload from 'connect-livereload';
 
 dotenv.config();
 
 const __dirname = path.resolve();
 const app = express();
 const port = process.env.PORT || 3000;
-const staticFolder = "public";
-
-let dataStore = []; // typically we would read into sqlite but yolo
+const staticFolder = 'public';
 
 // Add some auto-reloading to our server
 const liveReloadServer = reload.createServer();
@@ -28,10 +26,10 @@ app.use(express.json());
 app.use(express.static(staticFolder));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
   );
   next();
 });
@@ -41,46 +39,28 @@ function someAlgo(string, data) {
 }
 
 app
-  .route("/api")
+  .route('/api')
   .get(async (req, res) => {
-    console.log("GET request detected");
+    console.log('GET request detected');
     const data = await fetch(
-      "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"
+      'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'
     );
     const json = await data.json();
-    console.log("data from fetch", json);
+    console.log('data from fetch', json);
     res.json(json);
   })
   .post(async (req, res) => {
-    console.log("POST request detected");
-    console.log("Form data in res.body", req.body);
-
-    const facilities = someAlgo(req.body.zipcode, dataStore);
-    console.log("data from fetch", json);
-    res.json({ facilities: dataStore });
+    console.log('POST request detected');
+    console.log('Form data in res.body', req.body);
+    res.json({facilities: dataStore});
   });
 
 app.listen(port, async () => {
-  const police = await fetch(
-    "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"
-  );
-  const hospital = await fetch(
-    "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"
-  );
-  const fire = await fetch(
-    "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"
-  );
-
-  const pJson = await police.json();
-  const hJson = await hospital.json();
-  const fJson = await fire.json();
-
-  dataStore = [...pJson, ...hJson, ...fJson];
   console.log(`Example app listening on port ${port}!`);
 });
 
-liveReloadServer.server.once("connection", () => {
+liveReloadServer.server.once('connection', () => {
   setTimeout(() => {
-    liveReloadServer.refresh("/");
+    liveReloadServer.refresh('/');
   }, 100);
 });
