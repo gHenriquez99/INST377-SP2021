@@ -114,6 +114,7 @@ nav a, nav span {
 
 .main {
   display: flex;
+  background-color: rgba(0,255,0,0.5);;
 }
 
 .article, .section {
