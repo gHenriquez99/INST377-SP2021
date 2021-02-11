@@ -5,7 +5,18 @@ body {
   padding: 10px;
 }
 
+.carousel {
+  position: relative;
+  width: 398px;
+  padding: 10px 40px;
+  border: 1px solid #CCC;
+  border-radius: 15px;
+  background: #eee;
+}
+
 .arrow {
+  position: absolute;
+  top: 60px;
   padding: 0;
   background: #ddd;
   border-radius: 15px;
@@ -25,11 +36,11 @@ body {
   cursor: pointer;
 }
 
-.Back {
+.back {
   left: 7px;
 }
 
-.Fwd {
+.fwd {
   right: 7px;
 }
 
@@ -49,5 +60,26 @@ ul img {
 }
 
 ul li {
+  display: inline-block;
+}
+
+.gallery {
+  width: 390px;
+  overflow: hidden;
+}
+
+.gallery ul {
+  height: 130px;
+  width: 9999px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: margin-left 250ms;
+  /* remove white-space between inline-block'ed li */
+  /* http://davidwalsh.name/remove-whitespace-inline-block */
+  font-size: 0;
+}
+
+.gallery li {
   display: inline-block;
 }
