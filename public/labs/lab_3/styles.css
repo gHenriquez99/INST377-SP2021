@@ -1,6 +1,3 @@
-/* Add some css styles based on the tutorial at javascript.info: introduction to browser events
- https://javascript.info/introduction-browser-events */
-
 body {
   padding: 10px;
 }
@@ -75,8 +72,6 @@ ul li {
   padding: 0;
   list-style: none;
   transition: margin-left 250ms;
-  /* remove white-space between inline-block'ed li */
-  /* http://davidwalsh.name/remove-whitespace-inline-block */
   font-size: 0;
 }
 

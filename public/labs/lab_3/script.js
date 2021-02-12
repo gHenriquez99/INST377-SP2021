@@ -1,15 +1,3 @@
-// function doTheThing(event) {
-//   alert(event.type);
-// }
-
-// document.querySelector('#div1').onclick = doTheThing;
-
-// .foreach and .map are the array methods we should be using
-const i = 1;
-// let labeled = carousel.querySelectorAll("li").array.map(element => {
-//     element.style.position = "relative";
-// });
-
 const images = carousel.querySelectorAll('li');
 const imageArray = Array.from(images);
 
@@ -20,8 +8,6 @@ const newArray = imageArray.map((element) => {
   listItem.insertAdjacentHTML('beforeend', '<span style="position:absolute;left:0;top:0">1</span>');
   return listItem;
 });
-
-console.log(newArray);
 
 const width = 130;
 const count = 3;
