@@ -18,18 +18,18 @@ const listElems = newArray;
 
 let position = 0;
 
-carousel.querySelector('.back').onclick = function() {
-  // shift left
+carousel.querySelector('.back').addEventListener('click', () => {
+  // shift it left
   position += width * count;
   // can't move to the left too much, end of images
   position = Math.min(position, 0);
   list.style.marginLeft = `${position}px`;
-};
+});
 
-carousel.querySelector('.fwd').onclick = function() {
-  // shift right
+carousel.querySelector('.fwd').addEventListener('click', () => {
+  // shift it right 
   position -= width * count;
-  // can only shift the ribbbon for (total ribbon length - visible count) images
+  // can onyl shift the ribbon for (total ribbon length - visible count) images
   position = Math.max(position, -width * (listElems.length - count));
   list.style.marginLeft = `${position}px`;
-};
+});
