@@ -1,5 +1,6 @@
 body {
   padding: 10px;
+  background-color: tan;
 }
 
 .carousel {
@@ -9,6 +10,7 @@ body {
   border: 1px solid #CCC;
   border-radius: 15px;
   background: #eee;
+  margin: auto;
 }
 
 .arrow {
