@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 document.addEventListener('DOMContentLoaded', () => {
   const bird = document.querySelector('.bird');
   const gameDisplay = document.querySelector('.gameContainer');
@@ -63,7 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (
         obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220
+        // eslint-disable-next-line no-mixed-operators
         && (birdBottom < obstacleBottom + 153 || birdBottom > obstacleBottom + gap - 200)
+        // eslint-disable-next-line no-mixed-operators
         || birdBottom === 0
       ) {
         gameOver();
