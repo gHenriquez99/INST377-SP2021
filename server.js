@@ -34,16 +34,7 @@ app.use((req, res, next) => {
   next();
 });
 
-<<<<<<< HEAD
-function someAlgo(string, data) {
-  return data.filter((f) => f.zipcode === string); // do a bunch of math to find the thing you want;
-}
-
-app
-  .route('/api')
-=======
 app.route('/api')
->>>>>>> e1795a97299d7518d5f76cc741f7713691f9a58f
   .get(async (req, res) => {
     console.log('GET request detected');
     const data = await fetch(
