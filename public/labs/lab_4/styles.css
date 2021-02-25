@@ -2,6 +2,10 @@ body{
     background: #a3ccf5;
 }
 
+ul.flex-outer{
+    max-width: 800px;
+}
+
 .flex-outer li,
 .flex-inner {
     display: flex;
@@ -19,7 +23,7 @@ body{
 
 .flex-outer > li > label + *, 
 .flex-inner {
-    flex: 1 0 220px;
+    flex: 1 0 225px;
     font-weight: bold;
 }
 
