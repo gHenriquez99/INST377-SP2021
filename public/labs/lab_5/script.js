@@ -1,6 +1,6 @@
 function mapInit() {
   // follow the Leaflet Getting Started tutorial here
-  const mymap = L.map('mapid').setView([51.505, -0.09], 13);
+  const mymap = L.map('mapid').setView([38.98, -76.93], 13);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -24,19 +24,35 @@ async function dataHandler(mapObjectFromFunction) {
   const data = await request.json();
   console.log(data);
 
-  form.addEventListener('submit', (event) => {
+  function displayResult(dataList, index) {
+    const elem = document.createElement('li');
+    elem.classList.add('list-item');
+    elem.innerText = `${dataList[index].name}\n${dataList[index].address_line_1}`;
+    target.append(elem);
+
+    const latCoord = dataList[index].geocoded_column_1.coordinates[1];
+    const longCoord = dataList[index].geocoded_column_1.coordinates[0];
+    console.log('coordinates', latCoord, longCoord);
+    const marker = L.marker([latCoord, longCoord], 'setView').addTo(mapObjectFromFunction);
+    marker.bindPopup(`${dataList[index].name}`);
+  }
+
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     target.innerHTML = '';
     console.log('Submit button has been clicked!');
-    const filtered = data.filter(((record) => record.zip === search.value));
+    // eslint-disable-next-line max-len
+    const filtered = data.filter(((record) => (record.zip === search.value) && record.geocoded_column_1));
     console.log(filtered);
-    console.log(filtered[0].zip);
+    // eslint-disable-next-line max-len
+    mapObjectFromFunction.panTo([filtered[0].geocoded_column_1.coordinates[1], filtered[0].geocoded_column_1.coordinates[0]], 0);
     if (filtered.length >= 5) {
       for (let i = 0; i < 5; i += 1) {
-        const elem = document.createElement('li');
-        elem.classList.add('list-item');
-        elem.innerText = `${filtered[i].name}\n${filtered[i].address_line_1}`;
-        target.append(elem);
+        displayResult(filtered, i);
+      }
+    } else {
+      for (let i = 0; i < filtered.length; i += 1) {
+        displayResult(filtered, i);
       }
     }
   });
