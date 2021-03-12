@@ -56,6 +56,13 @@ async function dataHandler(mapObjectFromFunction) {
       }
     }
   });
+
+  search.addEventListener('input', (event) => {
+    console.log(search.value);
+    if (search.value == '') {
+      target.innerHTML = '';
+    }
+  });
 }
 
 async function windowActions() {
